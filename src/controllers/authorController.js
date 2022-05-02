@@ -55,7 +55,7 @@ const loginauthor = async function (req, res) {
     let userName = req.body.email;
     let password = req.body.Password;
   
-    let author = await authorModel.findOne({ email: userName, Password: password });
+    let author = await authorModel.findOne({ email: userName, password: password });
     if (!author)
       return res. status(400).send({
         status: false,
