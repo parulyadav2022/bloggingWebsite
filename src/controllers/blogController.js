@@ -157,7 +157,8 @@ const deleteBlogById = async (req, res)=> {
       let timeStamps = new Date();
   
       let deletedBlog = await blogModel.updateMany( 
-        {$and: [ {isDeleted: false, isPublished: true}, {$or: [ {authorId: data.authorId}, {category: {$in: [data.category]}}, {tags: {$in: [data.tags]}}, {subcategory: {$in: [data.subcategory]}} ] } ]},
+        {$and: [ {isDeleted: false, isPublished: true,...data}]},
+          //{$or: [ {authorId: data.authorId}, {category: {$in: [data.category]}}, {tags: {$in: [data.tags]}}, {subcategory: {$in: [data.subcategory]}} ] } ]},
         {$set: {isDeleted: true, deletedAt: timeStamps}},
         {new: true}, 
       )
